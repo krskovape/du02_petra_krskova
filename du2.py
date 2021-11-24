@@ -1,38 +1,46 @@
-#Bělá, Častolovice
 import csv
 
-def pocet_radku(nazev_souboru):
-    sum = 0
-    with open(nazev_souboru) as f:
-        reader = csv.reader(f)
-        for row in reader:
-            sum += 1
-    return sum
-
-print(pocet_radku("vstup.csv"))
-
+#otevření souboru se vstupními daty a definice výstupních souborů
 with open("vstup.csv", encoding="utf-8") as csvinfile,\
-    open("vystup_7dni.csv", "w", newline="", encoding="utf-8") as csvoutfile:
+    open("vystup_7dni.csv", "w", newline="", encoding="utf-8") as csvoutfile_tyden,\
+    open("vystup_rok.csv", "w", newline="", encoding="utf-8") as csvoutfile_rok:
     reader = csv.reader(csvinfile, delimiter = ",")
-    writer = csv.writer(csvoutfile)
+    writer_tyden = csv.writer(csvoutfile_tyden)
+    writer_rok = csv.writer(csvoutfile_rok)
 
-    opakovani = pocet_radku("vstup.csv")//7 + 1
+    #inicializace proměnných
+    pocet_radku = 0   
+    sum_prutok = 0
+    zbyle_dny = 0
+
+    for row in reader:
+        #přiřazení řádku do nové proměnné, pokud se jedná o první den týdne
+        if pocet_radku % 7 == 0:
+            prvni_den_tyden = row
+
+        #ošetření nekorektního vstupu
+        try:
+            sum_prutok += float(row[5])
+            zbyle_dny += 1
+        except ValueError:
+            pass
+        
+        #spočítání sedmidenního průměru a jeho zápis do souboru
+        if pocet_radku % 7 == 6:
+            prumer_prutok = sum_prutok / 7
+            prvni_den_tyden[5] = f" {prumer_prutok:.4f}"
+            writer_tyden.writerow(prvni_den_tyden)
+            sum_prutok = 0
+            prumer_prutok = 0
+            zbyle_dny = 0
+        pocet_radku += 1
     
-    a=0
-    b=7
+    #dopočítání průměru ze zbylých dnů
+    if pocet_radku % 7 != 6:
+        prumer_prutok = sum_prutok / zbyle_dny
+        prvni_den_tyden[5] = f" {prumer_prutok:.4f}"
+        writer_tyden.writerow(prvni_den_tyden)
 
-    for row in range(opakovani):
-        sum = 0
-        for row in list(reader)[a:b]:
-            try:
-                sum += float(row[5])
-            except ValueError:
-                pass
-        prumer = sum/7
-        print(f"{prumer:.4f}")
-        writer.writerow([row[0], row[1], row[2], row[3], row[4], f"  {prumer:.4f}"])
-        a += 7
-        b += 7
 
 
 
