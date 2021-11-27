@@ -66,7 +66,7 @@ try:
             #spočítání sedmidenního průměru a jeho zápis do souboru
             if pocet_radku % 7 == 6:
                 prumer_prutok_tyden = sum_prutok_tyden / 7
-                prvni_den_tyden[5] = f" {prumer_prutok_tyden:.4f}"
+                prvni_den_tyden[5] = f"   {prumer_prutok_tyden:.4f}"
                 writer_tyden.writerow(prvni_den_tyden)
                 sum_prutok_tyden = 0
                 zbyle_dny_tyden = 0
@@ -74,7 +74,7 @@ try:
             #spočítání ročního průměru a jeho zapsání do souboru
             if aktualni_rok != rok_prutoku:
                 prumer_prutok_rok = (sum_prutok_rok - aktualni_prutok) / (zbyle_dny_rok - 1)
-                prvni_den_rok[5] = f" {prumer_prutok_rok:.4f}"
+                prvni_den_rok[5] = f"   {prumer_prutok_rok:.4f}"
                 writer_rok.writerow(prvni_den_rok)
                 sum_prutok_rok = aktualni_prutok
                 zbyle_dny_rok = 1
@@ -94,13 +94,13 @@ try:
         #dopočítání sedmidenního průměru ze zbylých dnů
         if (pocet_radku - 1) % 7 != 6:
             prumer_prutok_tyden = sum_prutok_tyden / zbyle_dny_tyden
-            prvni_den_tyden[5] = f" {prumer_prutok_tyden:.4f}"
+            prvni_den_tyden[5] = f"   {prumer_prutok_tyden:.4f}"
             writer_tyden.writerow(prvni_den_tyden)
         
         #dopočítání ročního průměru za poslední rok
         if aktualni_rok == rok_prutoku:
             prumer_prutok_rok = sum_prutok_rok / zbyle_dny_rok
-            prvni_den_rok[5] = f" {prumer_prutok_rok:.4f}"
+            prvni_den_rok[5] = f"   {prumer_prutok_rok:.4f}"
             writer_rok.writerow(prvni_den_rok)
 
         #výpis maximálního a minimálního průtoku
