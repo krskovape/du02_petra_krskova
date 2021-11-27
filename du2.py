@@ -26,8 +26,6 @@ with open("vstup.csv", encoding="utf-8") as csvinfile,\
         if pocet_radku == 0:
             rok_prutoku = aktualni_rok
             prvni_den_rok = row
-            radek_max_prutok = row
-            radek_min_prutok = row
         
         #ošetření nekorektního vstupu
         try:
@@ -59,14 +57,6 @@ with open("vstup.csv", encoding="utf-8") as csvinfile,\
             rok_prutoku = aktualni_rok
             prvni_den_rok = row
         
-        #kontrola maxima a minima
-        max_prutok = float(radek_max_prutok[5])
-        min_prutok = float(radek_min_prutok[5])
-        if aktualni_prutok > max_prutok:
-            radek_max_prutok = row
-        elif aktualni_prutok < min_prutok:
-            radek_min_prutok = row
-        
         pocet_radku += 1
     
     #dopočítání sedmidenního průměru ze zbylých dnů
@@ -80,6 +70,25 @@ with open("vstup.csv", encoding="utf-8") as csvinfile,\
         prumer_prutok_rok = sum_prutok_rok / zbyle_dny_rok
         prvni_den_rok[5] = f" {prumer_prutok_rok:.4f}"
         writer_rok.writerow(prvni_den_rok)
-    
+
+with open("vstup.csv", encoding="utf-8") as csvinfile:
+    reader = csv.reader(csvinfile, delimiter = ",")
+
+    for row in reader:
+        if reader.line_num == 1:
+            radek_max_prutok = row
+            radek_min_prutok = row
+            max_prutok = float(radek_max_prutok[5])
+            min_prutok = float(radek_min_prutok[5])
+        
+        aktualni_prutok = float(row[5])
+        
+        if aktualni_prutok > max_prutok:
+            radek_max_prutok = row
+            max_prutok = aktualni_prutok
+        elif aktualni_prutok < min_prutok:
+            radek_min_prutok = row
+            min_prutok = aktualni_prutok
+
     print(f"Maximální průtok byl {radek_max_prutok[4]}.{radek_max_prutok[3]}.{radek_max_prutok[2]} s hodnotou {radek_max_prutok[5]}.")
     print(f"Minimální průtok byl {radek_min_prutok[4]}.{radek_min_prutok[3]}.{radek_min_prutok[2]} s hodnotou {radek_min_prutok[5]}.")
