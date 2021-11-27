@@ -1,5 +1,5 @@
 import csv
-#SEDMIDENNÍ PRŮTOKY
+
 #otevření souboru se vstupními daty a definice výstupních souborů
 with open("vstup.csv", encoding="utf-8") as csvinfile,\
     open("vystup_7dni.csv", "w", newline="", encoding="utf-8") as csvoutfile_tyden,\
