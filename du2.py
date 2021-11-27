@@ -65,7 +65,7 @@ try:
 
             #spočítání sedmidenního průměru a jeho zápis do souboru
             if pocet_radku % 7 == 6:
-                prumer_prutok_tyden = sum_prutok_tyden / 7
+                prumer_prutok_tyden = sum_prutok_tyden / zbyle_dny_tyden
                 prvni_den_tyden[5] = f"   {prumer_prutok_tyden:.4f}"
                 writer_tyden.writerow(prvni_den_tyden)
                 sum_prutok_tyden = 0
