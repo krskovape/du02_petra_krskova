@@ -37,6 +37,13 @@ with open("vstup.csv", encoding="utf-8") as csvinfile,\
         except ValueError:
             print(f"Na řádku {pocet_radku} je chybně zadaná hodnota a program ji přeskočí.")
         
+        #kontrola nulového nebo záporného průtoku
+        if aktualni_prutok == 0:
+            print(f"{row[4]}.{row[3]}.{row[2]} byl průtok nulový.")
+        elif aktualni_prutok < 0:
+            print(f"{row[4]}.{row[3]}.{row[2]} byl průtok záporný. Hodnota průtoku = {aktualni_prutok}")
+
+
         #spočítání sedmidenního průměru a jeho zápis do souboru
         if pocet_radku % 7 == 6:
             prumer_prutok_tyden = sum_prutok_tyden / 7
@@ -71,6 +78,7 @@ with open("vstup.csv", encoding="utf-8") as csvinfile,\
         prvni_den_rok[5] = f" {prumer_prutok_rok:.4f}"
         writer_rok.writerow(prvni_den_rok)
 
+#výpis maximálního a minimálního průtoku
 with open("vstup.csv", encoding="utf-8") as csvinfile:
     reader = csv.reader(csvinfile, delimiter = ",")
 
