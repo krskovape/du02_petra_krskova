@@ -47,7 +47,7 @@ try:
                 zbyle_dny_tyden += 1
                 zbyle_dny_rok += 1
             except ValueError:
-                print(f"Na řádku {pocet_radku} je chybně zadaná hodnota průtoku a program ji přeskočí.")
+                print(f"Na řádku {reader.line_num} je chybně zadaná hodnota průtoku a program ji přeskočí.")
                 continue
             
             #chybějící dny
