@@ -10,7 +10,7 @@
 
         2. přiřazení roku z prvního řádku do proměnné představující rok, za který se počítá průměr
 
-            První řádek ze souboru je přiřazen do proměnné odpovídající prvnímu dni z počítaného roku (prvni_den_rok) a rok je přiřazen do proměnné (rok_prutoku), která definuje, pro jaký rok je aktuálně počítán průměrný průtok.
+            První řádek ze souboru je přiřazen do proměnné odpovídající prvnímu dni z počítaného roku (prvni_den_rok) a rok je přiřazen do proměnné (rok_prutoku), která definuje, pro jaký rok je aktuálně počítán průměrný průtok. První řádek je zároveň přiřazen do řádku s max. i min. průtokem a jeho hodnoty do odpovídajících proměnných (max_prutok a min_prutok).
 
         3. ošetření nekorektního vstupu
 
@@ -27,13 +27,19 @@
         6.  spočítání ročního průměru a jeho zapsání do souboru
 
             Pokud se aktuální rok nerovná roku, pro který je počítán průměrný průtok, znamená to, že program narazil na první řádek dalšího roku. Průtok tohoto dne je tak odečten od sumy průtoků a je spočítán průměrný průtok za počítaný rok, který je následně vypsán do souboru. Hodnoty tohoto prvního dne, by ale chyběly ve výpočtu průměru za nový rok a proto je aktuální průtok přiřazen do proměnné počítající sumy průtoků (sum_prutok_rok) a proměnná počítající dny (zbyle_dny_rok) v roce je nastavena na 1. Aktuální řádek je také přiřazen do proměnné odpovídající prvnímu dni v roce (prvni_den_rok).
-            
-        7. Na konci každého cyklu je pak hodnota proměnné udržující počet řádků zvýšena o 1.
+
+        7. kontrola maxima a minima
+
+            Aktuální průtok daného řádku je porovnán s maximem a minimem. Pokud je větší než max., je průtok přiřazen do max. průtoku a celý řádek do dané proměnné. Obdobně, pokud je aktuální průtok menší než minimální průtok.
+
+        8. Na konci každého cyklu je pak hodnota proměnné udržující počet řádků zvýšena o 1.
+
     4. dopočítání sedmidenního průměru ze zbylých dnů
+
         Pokud není počet řádků souboru beze zbytku dělitelný sedmi, je potřeba spočítat průměr za zbylé dny po skončení FOR cyklu. Proměnná udržující počet řádků je zvýšena o 1 na konci každého cyklu, takže po jeho úplném skončení je o 1 vyšší, než je skutečný počet řádků. Proto je při porovnávání od počtu řádků odečtena 1. Pokud je zbytek po jedho celočíselném dělení sedmi různý od šesti, znamená to, že na konci souboru zbylo méně než sedm řádků a nebyl pro ně spočítán průměr. Ten je tak dopočítán a zapsán do souboru.
+
     5. dopočítání ročního průměru za poslední rok
+
         Jelikož k výpočtu průměrného ročního průtoku dochází při přeskočení na další rok, není ve FOR cyklu spočítán průměr za poslední rok. Ten je tak spočítán až po jeho úplném skončení.
-
-2. Výpis maximálního a minimálního průtoku
-
-    Program prochází řádky vstupního souboru. První řádek souboru přiřadí do řádku s max. i min. průtokem a jeho hodnoty do odpovídajících proměnných (max_prutok a min_prutok). Aktuální průtok daného řádku je pak porovnán s maximem a minimem. Pokud je větší než max., je průtok přiřazen do max. průtoku a celý řádek do dané proměnné. Obdobně, pokud je aktuální průtok menší než minimální průtok. Na závěr je do konzole vypsán datum a hodnota maximálního a minimálního průtoku.
+    
+    6. výpis maximálního a minimálního průtoku
