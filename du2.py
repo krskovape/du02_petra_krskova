@@ -31,9 +31,13 @@ try:
                 prvni_den_rok = row
                 radek_max_prutok = row
                 radek_min_prutok = row
-                max_prutok = float(radek_max_prutok[5])
-                min_prutok = float(radek_min_prutok[5])
                 datum1 = date(int(row[2]), int(row[3]), int(row[4]))
+                try:
+                    max_prutok = float(radek_max_prutok[5])
+                    min_prutok = float(radek_min_prutok[5])
+                except ValueError:
+                    print("Na prvním řádku je chybně zadaná hodnota průtoku.")
+                
 
             #ošetření nekorektního vstupu
             try:
@@ -44,6 +48,7 @@ try:
                 zbyle_dny_rok += 1
             except ValueError:
                 print(f"Na řádku {pocet_radku} je chybně zadaná hodnota průtoku a program ji přeskočí.")
+                continue
             
             #chybějící dny
             datum2 = date(int(row[2]), int(row[3]), int(row[4]))
