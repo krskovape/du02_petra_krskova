@@ -35,4 +35,5 @@
         Jelikož k výpočtu průměrného ročního průtoku dochází při přeskočení na další rok, není ve FOR cyklu spočítán průměr za poslední rok. Ten je tak spočítán až po jeho úplném skončení.
 
 2. Výpis maximálního a minimálního průtoku
+
     Program prochází řádky vstupního souboru. První řádek souboru přiřadí do řádku s max. i min. průtokem a jeho hodnoty do odpovídajících proměnných (max_prutok a min_prutok). Aktuální průtok daného řádku je pak porovnán s maximem a minimem. Pokud je větší než max., je průtok přiřazen do max. průtoku a celý řádek do dané proměnné. Obdobně, pokud je aktuální průtok menší než minimální průtok. Na závěr je do konzole vypsán datum a hodnota maximálního a minimálního průtoku.
