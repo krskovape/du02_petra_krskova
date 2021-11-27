@@ -109,3 +109,5 @@ try:
 
 except FileNotFoundError:
     print("Zadaný soubor se vstupními daty nelze otevřít. Soubor neexistuje, nebo je chybně zadaná cesta k jeho umístění.")
+except PermissionError:
+    print("Program nemá dostatečná oprávnění ke vstupnímu nebo výstupnímu programu.")
