@@ -1,4 +1,5 @@
 import csv
+from datetime import date, timedelta
 
 try:
     #otevření souboru se vstupními daty a definice výstupních souborů
@@ -15,6 +16,7 @@ try:
         zbyle_dny_tyden = 0
         sum_prutok_rok = 0
         zbyle_dny_rok = 0
+        rozdil_dny = timedelta(days=1)
 
         for row in reader:
             aktualni_rok = int(row[2])
@@ -31,7 +33,8 @@ try:
                 radek_min_prutok = row
                 max_prutok = float(radek_max_prutok[5])
                 min_prutok = float(radek_min_prutok[5])
-            
+                datum1 = date(int(row[2]), int(row[3]), int(row[4]))
+
             #ošetření nekorektního vstupu
             try:
                 sum_prutok_tyden += float(row[5])
@@ -42,6 +45,17 @@ try:
             except ValueError:
                 print(f"Na řádku {pocet_radku} je chybně zadaná hodnota průtoku a program ji přeskočí.")
             
+            #chybějící dny
+            datum2 = date(int(row[2]), int(row[3]), int(row[4]))
+            if datum2 - datum1 == rozdil_dny:
+                pass
+            elif datum2 - datum1 != rozdil_dny:
+                datum = datum1 + rozdil_dny
+                while datum < datum2:
+                    print (f"Chybí hodnota průtoku pro {datum}.")
+                    datum += rozdil_dny
+            datum1 = datum2
+
             #kontrola nulového nebo záporného průtoku
             if aktualni_prutok == 0:
                 print(f"{row[4]}.{row[3]}.{row[2]} byl průtok nulový.")
@@ -88,7 +102,7 @@ try:
             prumer_prutok_rok = sum_prutok_rok / zbyle_dny_rok
             prvni_den_rok[5] = f" {prumer_prutok_rok:.4f}"
             writer_rok.writerow(prvni_den_rok)
-        
+
         #výpis maximálního a minimálního průtoku
         print(f"Maximální průtok byl {radek_max_prutok[4]}.{radek_max_prutok[3]}.{radek_max_prutok[2]} s hodnotou {max_prutok}.")
         print(f"Minimální průtok byl {radek_min_prutok[4]}.{radek_min_prutok[3]}.{radek_min_prutok[2]} s hodnotou {min_prutok}.")

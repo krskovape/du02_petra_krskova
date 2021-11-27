@@ -10,29 +10,33 @@
 
         2. přiřazení roku z prvního řádku do proměnné představující rok, za který se počítá průměr
 
-            První řádek ze souboru je přiřazen do proměnné odpovídající prvnímu dni z počítaného roku (prvni_den_rok) a rok je přiřazen do proměnné (rok_prutoku), která definuje, pro jaký rok je aktuálně počítán průměrný průtok. První řádek je zároveň přiřazen do řádku s max. i min. průtokem a jeho hodnoty do odpovídajících proměnných (max_prutok a min_prutok).
+            První řádek ze souboru je přiřazen do proměnné odpovídající prvnímu dni z počítaného roku (prvni_den_rok) a rok je přiřazen do proměnné (rok_prutoku), která definuje, pro jaký rok je aktuálně počítán průměrný průtok. První řádek je zároveň přiřazen do řádku s max. i min. průtokem a jeho hodnoty do odpovídajících proměnných (max_prutok a min_prutok). Datum tohoto řádku je také přiřazeno do proměnné datum1
 
         3. ošetření nekorektního vstupu
 
             Při chybě ve vstupních datech je vypsána hláška uživateli.
 
-        4. kontrola nulového nebo záporného průtoku
+        4. chybějící dny
+
+            Do proměnné datum2 je přiřazeno datum aktuálního řádku. Proměnná rozdil_dny je inicializovaná na rozdíl jednoho dne a program porovná, zda tomu rozdíl proměnných datum2 a datum1 odpovídá. Pokud ano, pokračuje dál, pokud ne, spočítá dny, které mezi oběma daty chybí a vypíše je.    
+
+        5. kontrola nulového nebo záporného průtoku
 
             Program porovná, zda není aktuální průtok nulový či záporný a případně vypíše hlášku do konzole.
 
-        5. spočítání sedmidenního průměru a jeho zápis do souboru
+        6. spočítání sedmidenního průměru a jeho zápis do souboru
 
             Pokud zbytek po celočíselném dělení počtu řádků sedmi odpovídá šesti, znamená to, že program narazil na poslední ze sedmi dnů a vypočítá jejich průměrný průtok. Ten následně zapíše do souboru a vynuluje pomocné proměnné.
 
-        6.  spočítání ročního průměru a jeho zapsání do souboru
+        7.  spočítání ročního průměru a jeho zapsání do souboru
 
             Pokud se aktuální rok nerovná roku, pro který je počítán průměrný průtok, znamená to, že program narazil na první řádek dalšího roku. Průtok tohoto dne je tak odečten od sumy průtoků a je spočítán průměrný průtok za počítaný rok, který je následně vypsán do souboru. Hodnoty tohoto prvního dne, by ale chyběly ve výpočtu průměru za nový rok a proto je aktuální průtok přiřazen do proměnné počítající sumy průtoků (sum_prutok_rok) a proměnná počítající dny (zbyle_dny_rok) v roce je nastavena na 1. Aktuální řádek je také přiřazen do proměnné odpovídající prvnímu dni v roce (prvni_den_rok).
 
-        7. kontrola maxima a minima
+        8. kontrola maxima a minima
 
             Aktuální průtok daného řádku je porovnán s maximem a minimem. Pokud je větší než max., je průtok přiřazen do max. průtoku a celý řádek do dané proměnné. Obdobně, pokud je aktuální průtok menší než minimální průtok.
 
-        8. Na konci každého cyklu je pak hodnota proměnné udržující počet řádků zvýšena o 1.
+        9. Na konci každého cyklu je pak hodnota proměnné udržující počet řádků zvýšena o 1.
 
     4. dopočítání sedmidenního průměru ze zbylých dnů
 
