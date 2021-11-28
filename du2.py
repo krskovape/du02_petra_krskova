@@ -62,9 +62,7 @@ try:
                 datum2 = date(int(row[2]), int(row[3]), int(row[4]))
             except ValueError:
                 print(f"Na řádku {reader.line_num} je chybně zadané datum a program ho přeskočí.")
-            if datum2 - datum1 == rozdil_dny:
-                pass
-            elif datum2 - datum1 != rozdil_dny:
+            if datum2 - datum1 != rozdil_dny:
                 datum = datum1 + rozdil_dny
                 while datum < datum2:
                     print (f"Chybí hodnota průtoku pro {datum}.")
@@ -113,10 +111,9 @@ try:
             writer_tyden.writerow(prvni_den_tyden)
         
         #dopočítání ročního průměru za poslední rok
-        if aktualni_rok == rok_prutoku:
-            prumer_prutok_rok = sum_prutok_rok / zbyle_dny_rok
-            prvni_den_rok[5] = f"   {prumer_prutok_rok:.4f}"
-            writer_rok.writerow(prvni_den_rok)
+        prumer_prutok_rok = sum_prutok_rok / zbyle_dny_rok
+        prvni_den_rok[5] = f"   {prumer_prutok_rok:.4f}"
+        writer_rok.writerow(prvni_den_rok)
 
         #výpis maximálního a minimálního průtoku
         print(f"Maximální průtok byl {radek_max_prutok[4]}.{radek_max_prutok[3]}.{radek_max_prutok[2]} s hodnotou {max_prutok}.")
