@@ -19,7 +19,11 @@ try:
         rozdil_dny = timedelta(days=1)
 
         for row in reader:
-            aktualni_rok = int(row[2])
+            try:
+                aktualni_rok = int(row[2])
+            except ValueError:
+                print(f"Na řádku {reader.line_num} je chybně zadaný rok a program ho přeskočí.")
+                continue
 
             #přiřazení řádku do nové proměnné, pokud se jedná o první den týdne
             if pocet_radku % 7 == 0:
@@ -31,7 +35,10 @@ try:
                 prvni_den_rok = row
                 radek_max_prutok = row
                 radek_min_prutok = row
-                datum1 = date(int(row[2]), int(row[3]), int(row[4]))
+                try:
+                    datum1 = date(int(row[2]), int(row[3]), int(row[4]))
+                except ValueError:
+                    print("Na prvním řádku je chybně zadané datum.")
                 try:
                     max_prutok = float(radek_max_prutok[5])
                     min_prutok = float(radek_min_prutok[5])
@@ -51,7 +58,10 @@ try:
                 continue
             
             #chybějící dny
-            datum2 = date(int(row[2]), int(row[3]), int(row[4]))
+            try:
+                datum2 = date(int(row[2]), int(row[3]), int(row[4]))
+            except ValueError:
+                print(f"Na řádku {reader.line_num} je chybně zadané datum a program ho přeskočí.")
             if datum2 - datum1 == rozdil_dny:
                 pass
             elif datum2 - datum1 != rozdil_dny:
